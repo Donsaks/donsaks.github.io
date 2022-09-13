@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        html, body {height: 100%;}
+        body {background-color: #999; background: radial-gradient(gray, black); background-repeat: no-repeat; background-size: cover;}
+        .calc {background: #353535; width: 300px; padding: 10px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; height: 320px; border-radius: 5px; box-shadow: 0 6px 0 #a1a1a1, 0 8px 10px rgba(0, 0, 0, 0.75);}
+        /*box-shadow: x-axis, y-axis, blur, color*/
+        .result {background-color: #cecfac; color: #3b3b32; width: 90%; margin: 8px 0 20px 10px; text-align: right; height: 50px; line-height: 50px; font-size: 30px; padding-right: 10px; overflow: hidden;box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5), inset 0 2px 0 #a1a1a1;}
+        .button {margin: 0; padding: 0; background-color: red; margin-left: 7px;}
+        div button {background-color: white; padding: 10px; width: 23%; float: left; margin: 2px; cursor: pointer; border-radius: 5px; box-shadow: 0 2px 0 #a5a5a5, inset 0 2px 5px #a1a1a1;}
+        .signature {color: whitesmoke; font-family: cursive; font-size: 0.75rem; text-align: right; position: relative; top: 4px; right: 10px; z-index: -1;}
+        div button:active {position: relative; top: 2px; box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);}
+        div button:nth-child(16) {height: 83px;}
+        div button:last-child {margin-top: -40px; width: 210px;}
+    </style>
+</head>
+<body>
+    <div class="calc">
+        <div class="result">0</div>
+        <div class="button">
+            <button>C</button>
+            <button>*</button>
+            <button>/</button>
+            <button>.</button>
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button>+</button>
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button>-</button>
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>=</button>
+            <button>0</button>
+        </div>
+        <div class="signature">
+            Nice Calculator by Buff
+        </div>
+    </div>
+
+    <script>
+        const buttons = document.querySelectorAll("div button")
+        buttons.forEach((node) => {
+            node.addEventListener('mousedown', function(event) {
+                event.preventDefault()
+                const value = node.innerText.trim()
+                const result = document.querySelector(".result")
+                const resultText = result.innerText.trim()
+
+                if(resultText == '0' || resultText == 'undefined' || resultText == 'Infinity') {
+                    result.innerText = ''
+                }
+
+                if(value == '=') {
+                    let solution = eval(resultText)
+                    result.innerText = solution
+                    return true
+                }
+
+                if(value.toLowerCase() == 'c') {
+                    result.innerText = ''
+                    return true
+                }
+
+                result.append(value)
+            })
+        })
+    </script>
+</body>
+</html>
